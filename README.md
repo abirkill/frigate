@@ -62,7 +62,7 @@ Access the mjpeg stream at `http://localhost:5000/<camera_name>` and the best pe
 camera:
   - name: Camera Last Person
     platform: mqtt
-    topic: frigate/<camera_name>/objects
+    topic: frigate/<camera_name>/snapshot
 
 binary_sensor:
   - name: Camera Person
