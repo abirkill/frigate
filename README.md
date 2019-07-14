@@ -72,10 +72,6 @@ binary_sensor:
     device_class: motion
     availability_topic: "frigate/available"
 
-# make sure you update your configuration.yaml with:
-# homeassistant: 
-#   whitelist_external_dirs: 
-#     - /camera_snapshots
 automation:
   - alias: Alert me if a person is detected while armed away
     trigger: 
@@ -88,18 +84,12 @@ automation:
         entity_id: alarm_control_panel.home_alarm
         state: armed_away
     action:
-      - service: camera.snapshot
-        data:
-          entity_id: camera.camera_last_person
-          filename: /camera_snapshots/camera_last_person.jpg
-      - delay: 
-        seconds: 5
       - service: notify.user_telegram
         data:
           message: "A person was detected."
           data:
             photo:
-              - file: /camera_snapshots/camera_last_person.jpg
+              - url: http://<ip>:5000/<camera_name>/best_person.jpg
                 caption: A person was detected.
 ```
 
